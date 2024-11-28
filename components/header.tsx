@@ -8,7 +8,7 @@ import { MenuIcon } from "lucide-react";
 const Header = () => {
   return (
     <Card>
-      <CardContent className="flex items-center justify-between px-4 py-3">
+      <CardContent className="flex items-center justify-between px-4 py-5">
         <Image alt="YOURtasks" src="/logo.png" height={18} width={120} />
 
         <Sheet>

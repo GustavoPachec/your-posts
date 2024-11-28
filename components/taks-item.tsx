@@ -2,7 +2,6 @@ import { Task } from "@prisma/client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Edit, Trash2 } from "lucide-react";
 import Link from "next/link";
-
 interface TaskItemProps {
   task: Task;
 }
