@@ -1,6 +1,7 @@
 import { Task } from "@prisma/client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Edit, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 interface TaskItemProps {
   task: Task;
@@ -22,7 +23,9 @@ const TaskItem = ({ task }: TaskItemProps) => {
               aria-label="Editar tarefa"
               className="p-2 rounded-lg hover:bg-gray-100 transition-all"
             >
-              <Edit className="w-5 h-5 text-gray-700" />
+              <Link href={`/tasks/${task.id}`}>
+                <Edit className="w-5 h-5 text-gray-700" />
+              </Link>
             </button>
             <button
               aria-label="Exluir tarefa"

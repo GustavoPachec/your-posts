@@ -1,10 +1,11 @@
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
+import { PlusIcon, SearchIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
 import TaskItem from "@/components/taks-item";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 const Home = async () => {
   // chamar o banco
@@ -32,9 +33,16 @@ const Home = async () => {
           </div>
 
           {/* Título da seção de tarefas */}
-          <h2 className="mb-3 text-xs sm:text-sm font-bold uppercase text-gray-400">
-            Tarefas
-          </h2>
+          <div className="flex justify-between items-center w-full max-w-4xl mb-3">
+            <h2 className="text-xs sm:text-sm font-bold uppercase text-gray-400">
+              Tarefas
+            </h2>
+            <Button className="gap-1 font-bold">
+              <Link href="/create">
+                <PlusIcon className="w-4 h-4" /> Create Task
+              </Link>
+            </Button>
+          </div>
 
           {/* Grid responsivo para tarefas */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
