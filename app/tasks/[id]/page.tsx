@@ -1,4 +1,5 @@
 import { db } from "@/app/_lib/prisma";
+import SidebarSheet from "@/components/sidebar-sheet";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronLeft, MenuIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -54,13 +56,19 @@ const TaskPage = async ({ params }: TaskPageProps) => {
           </Link>
         </Button>
 
-        <Button
-          size="icon"
-          variant="secondary"
-          className="absolute right-4 top-4"
-        >
-          <MenuIcon />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              variant="outline"
+              className="absolute right-4 top-4"
+            >
+              <MenuIcon />
+            </Button>
+          </SheetTrigger>
+          <SidebarSheet />
+        </Sheet>
+
         <CardHeader>
           <CardTitle className="text-2xl font-bold">{task.title}</CardTitle>
         </CardHeader>

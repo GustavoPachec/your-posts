@@ -6,10 +6,12 @@ import { db } from "./_lib/prisma";
 import TaskItem from "@/components/taks-item";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
 
 const Home = async () => {
   // chamar o banco
   const tasks = await db.task.findMany({});
+  const session = await getServerSession();
 
   return (
     <>
@@ -18,7 +20,9 @@ const Home = async () => {
         <div className="p-5 w-full max-w-4xl flex flex-col items-center justify-center flex-1">
           {/* Saudações e data */}
           <div className="text-center mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">Olá, Gustavo</h2>
+            <h2 className="text-xl font-bold">
+              Olá, {session?.user ? session.user.name : "Bem vindo"}
+            </h2>
             <p className="text-sm sm:text-base text-gray-500">
               Segunda-feira, 29 de Novembro
             </p>

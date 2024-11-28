@@ -3,7 +3,13 @@
 import { signOut, useSession } from "next-auth/react";
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Dialog, DialogTrigger, DialogContent } from "@radix-ui/react-dialog";
-import { LogInIcon, Link, LogOutIcon } from "lucide-react";
+import {
+  LogInIcon,
+  Link,
+  LogOutIcon,
+  HomeIcon,
+  CalendarIcon,
+} from "lucide-react";
 import SignInDialog from "./sign-in-dialog";
 import { Button } from "./ui/button";
 import Image from "next/image";
@@ -47,6 +53,23 @@ const SidebarSheet = () => {
             </Dialog>
           </>
         )}
+      </div>
+
+      <div className="flex flex-col gap-2 border-b border-solid py-5">
+        <SheetClose asChild>
+          <Button className="justify-start gap-2" variant="ghost" asChild>
+            <Link href="/">
+              <HomeIcon size={18} />
+              Início
+            </Link>
+          </Button>
+        </SheetClose>
+        <Button className="justify-start gap-2" variant="ghost" asChild>
+          <Link href="/bookings">
+            <CalendarIcon size={18} />
+            Agendamentos
+          </Link>
+        </Button>
       </div>
 
       <div className="flex flex-col gap-2 border-b border-solid py-5">
