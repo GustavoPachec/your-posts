@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+- Authentication with Google: The application uses NextAuth.js to authenticate users via their Google accounts.
+
+- Basic CRUD Operations: A simple application with the capability to create, read, update, and delete tasks.
+- Form Validation: Form fields are validated using Formik and Yup for managing form state and ensuring data integrity.
+
 ## Getting Started
 
 First, run the development server:
