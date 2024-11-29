@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -11,9 +12,16 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // Importando o Select do Shadcn
 
 // Validação usando Yup
 const validationSchema = Yup.object({
@@ -23,6 +31,7 @@ const validationSchema = Yup.object({
   description: Yup.string()
     .required("A descrição é obrigatória")
     .min(5, "A descrição deve ter pelo menos 5 caracteres"),
+  status: Yup.string().required("O status é obrigatório"),
 });
 
 export const CreateTaskButton = ({
@@ -31,11 +40,23 @@ export const CreateTaskButton = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onCreate: (data: any) => void;
 }) => {
-  const handleSubmit = (values: { title: string; description: string }) => {
+  const handleSubmit = (values: {
+    title: string;
+    description: string;
+    status: string;
+  }) => {
     onCreate({
       ...values,
-      status: "NOT_INITIALIZED", // Status inicial
+      status: values.status || "NOT_INITIALIZED", // Default status
     });
+  };
+
+  // Função para renderizar ícones de status
+  const getStatusIcon = (status: string) => {
+    if (status === "IN_PROGRESS") {
+      return <Clock className="w-5 h-5 text-yellow-500" />;
+    }
+    return null;
   };
 
   return (
@@ -50,11 +71,15 @@ export const CreateTaskButton = ({
           <DialogTitle>Create New Task</DialogTitle>
         </DialogHeader>
         <Formik
-          initialValues={{ title: "", description: "" }}
+          initialValues={{
+            title: "",
+            description: "",
+            status: "NOT_INITIALIZED",
+          }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
             <Form className="space-y-4">
               {/* Campo de título */}
               <div>
@@ -84,6 +109,47 @@ export const CreateTaskButton = ({
                   component="div"
                   className="text-red-500 text-sm mt-1"
                 />
+              </div>
+
+              {/* Campo de Status */}
+              <div>
+                <Field name="status">
+                  {({ field }: { field: any }) => (
+                    <Select
+                      value={field.value}
+                      onValueChange={(value: string) =>
+                        setFieldValue("status", value)
+                      }
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Selecione o status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="NOT_INITIALIZED">
+                          Não Iniciada
+                        </SelectItem>
+                        <SelectItem value="IN_PROGRESS">
+                          Em Progresso
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="status"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
+              {/* Ícone de status */}
+              <div className="flex items-center space-x-2 mt-2">
+                {getStatusIcon(values.status)}
+                <span className="text-sm text-gray-600">
+                  {values.status === "IN_PROGRESS"
+                    ? "Em Progresso"
+                    : "Não Iniciada"}
+                </span>
               </div>
 
               <DialogFooter>
