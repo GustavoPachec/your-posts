@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
 import TaskItem from "@/components/taks-item";
-import { Card, CardContent } from "@/components/ui/card";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
 import { createTask } from "./_actions/create-task";
@@ -44,21 +43,16 @@ const Home = async () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-6">
-            {tasks.map((task) => (
-              <TaskItem key={task.id} task={task} />
-            ))}
+            {/* Verificar se há tarefas */}
+            {tasks.length > 0 ? (
+              tasks.map((task) => <TaskItem key={task.id} task={task} />)
+            ) : (
+              <div className="col-span-full text-center text-gray-500">
+                Nenhuma Tarefa
+              </div>
+            )}
           </div>
         </div>
-
-        <footer>
-          <Card>
-            <CardContent className="w-full px-5 py-6">
-              <p className="text-sm text-gray-400">
-                @ 2024 Copyrigth YOURtasks
-              </p>
-            </CardContent>
-          </Card>
-        </footer>
       </div>
     </>
   );

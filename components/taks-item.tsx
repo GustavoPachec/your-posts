@@ -1,7 +1,8 @@
 import { Task } from "@prisma/client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Edit, Trash2, CheckCircle, Clock } from "lucide-react";
-import Link from "next/link";
+import { CheckCircle, Clock, Edit } from "lucide-react";
+import { EditTaskButton } from "./edit-task-button";
+import { DeleteTaskButton } from "./delete-task-button";
 
 interface TaskItemProps {
   task: Task;
@@ -53,16 +54,19 @@ const TaskItem = ({ task }: TaskItemProps) => {
                 aria-label="Editar tarefa"
                 className="p-2 rounded-lg hover:bg-gray-100 transition-all"
               >
-                <Link href={`/tasks/${task.id}`}>
-                  <Edit className="w-5 h-5 text-gray-700" />
-                </Link>
+                <EditTaskButton
+                  taskId={task.id}
+                  initialData={{
+                    title: task.title,
+                    description: task.description,
+                    status: task.status,
+                  }}
+                >
+                  <Edit />
+                </EditTaskButton>
               </button>
-              <button
-                aria-label="Excluir tarefa"
-                className="p-2 rounded-lg hover:bg-gray-100 transition-all"
-              >
-                <Trash2 className="w-5 h-5 text-red-500" />
-              </button>
+
+              <DeleteTaskButton taskId={task.id} />
             </div>
           </div>
         </CardContent>

@@ -1,20 +1,13 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
-import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
-import { Dialog, DialogTrigger, DialogContent } from "@radix-ui/react-dialog";
-import {
-  LogInIcon,
-  Link,
-  LogOutIcon,
-  HomeIcon,
-  CalendarIcon,
-} from "lucide-react";
-import SignInDialog from "./sign-in-dialog";
 import { Button } from "./ui/button";
-import Image from "next/image";
+import { HomeIcon, LogInIcon, LogOutIcon } from "lucide-react";
+import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
+import Link from "next/link";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage } from "./ui/avatar";
-import { quickSearchOptions } from "@/app/_constants/search";
+import SignInDialog from "./sign-in-dialog";
 
 const SidebarSheet = () => {
   const { data } = useSession();
@@ -64,30 +57,6 @@ const SidebarSheet = () => {
             </Link>
           </Button>
         </SheetClose>
-        <Button className="justify-start gap-2" variant="ghost" asChild>
-          <Link href="/bookings">
-            <CalendarIcon size={18} />
-            Agendamentos
-          </Link>
-        </Button>
-      </div>
-
-      <div className="flex flex-col gap-2 border-b border-solid py-5">
-        {quickSearchOptions.map((option) => (
-          <SheetClose key={option.title} asChild>
-            <Button className="justify-start gap-2" variant="ghost" asChild>
-              <Link href={`/barbershops?service=${option.title}`}>
-                <Image
-                  alt={option.title}
-                  src={option.imageURL}
-                  height={18}
-                  width={18}
-                />
-                {option.title}
-              </Link>
-            </Button>
-          </SheetClose>
-        ))}
       </div>
 
       {data?.user && (

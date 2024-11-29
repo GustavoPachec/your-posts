@@ -1,4 +1,5 @@
 import { db } from "@/app/_lib/prisma";
+import { EditTaskButton } from "@/components/edit-task-button";
 import SidebarSheet from "@/components/sidebar-sheet";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronLeft, MenuIcon } from "lucide-react";
+import { ChevronLeft, Edit, MenuIcon } from "lucide-react";
 import Link from "next/link";
 
 interface TaskPageProps {
@@ -81,10 +82,14 @@ const TaskPage = async ({ params }: TaskPageProps) => {
           </div>
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-semibold">Status:</h2>
-            <h1>em progresso...</h1>
+            <h1>
+              {task.status === "PENDING" ? "Em progresso..." : "Não iniciada"}
+            </h1>
           </div>
           <div className="flex justify-end">
-            <Button variant="default">Editar Tarefa</Button>
+            <EditTaskButton taskId={task.id} key={task.id} initialData={task}>
+              <Edit />
+            </EditTaskButton>
           </div>
         </CardContent>
       </Card>

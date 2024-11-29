@@ -21,7 +21,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"; // Importando o Select do Shadcn
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast"; // Hook de toast
 
 // Validação usando Yup
 const validationSchema = Yup.object({
@@ -40,15 +41,34 @@ export const CreateTaskButton = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onCreate: (data: any) => void;
 }) => {
-  const handleSubmit = (values: {
+  const { toast } = useToast(); // Usando o hook de toast
+  const handleSubmit = async (values: {
     title: string;
     description: string;
     status: string;
   }) => {
-    onCreate({
-      ...values,
-      status: values.status || "NOT_INITIALIZED", // Default status
-    });
+    try {
+      await onCreate({
+        ...values,
+        status: values.status || "NOT_INITIALIZED",
+      });
+
+      // Exibindo o toast de sucesso
+      toast({
+        title: "Tarefa criada com sucesso!",
+        description: "Tarefa criada com sucesso.",
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast({
+        title: "Erro ao criar tarefa",
+        description: "Houve um problema ao criar a tarefa. Tente novamente.",
+      });
+    }
   };
 
   // Função para renderizar ícones de status
@@ -66,7 +86,7 @@ export const CreateTaskButton = ({
           <PlusIcon className="w-4 h-4" /> Create Task
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-full max-w-md sm:max-w-lg lg:max-w-xl p-4">
         <DialogHeader>
           <DialogTitle>Create New Task</DialogTitle>
         </DialogHeader>
