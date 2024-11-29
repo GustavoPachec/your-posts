@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/app/_lib/prisma";
 
 export async function PUT(req: Request, context: { params: { id: string } }) {
-  const { id } = context.params; // Pegue o ID do contexto
+  const { id } = context.params;
   const data = await req.json();
 
   try {

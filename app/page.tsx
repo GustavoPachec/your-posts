@@ -9,7 +9,6 @@ import { CreateTaskButton } from "@/components/create-task-button";
 import { createTask } from "./_actions/create-task";
 
 const Home = async () => {
-  // chamar o banco
   const tasks = await db.task.findMany({});
   const session = await getServerSession();
 
@@ -43,7 +42,6 @@ const Home = async () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-6">
-            {/* Verificar se há tarefas */}
             {tasks.length > 0 ? (
               tasks.map((task) => <TaskItem key={task.id} task={task} />)
             ) : (
