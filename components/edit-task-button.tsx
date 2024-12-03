@@ -79,7 +79,7 @@ export const EditTaskButton = ({
       <DialogTrigger asChild>
         <Edit className="w-5 h-5 text-gray-700 hover:gray-100 cursor-pointer" />
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-[calc(100%-2rem)] max-w-md sm:max-w-lg lg:max-w-xl p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>Editar Tarefa</DialogTitle>
         </DialogHeader>

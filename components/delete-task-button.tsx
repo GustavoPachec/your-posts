@@ -56,7 +56,7 @@ export const DeleteTaskButton = ({ taskId }: DeleteTaskButtonProps) => {
           <Trash2 className="w-5 h-5 text-red-500" />
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-[calc(100%-2rem)] max-w-md sm:max-w-lg lg:max-w-xl p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>Excluir Tarefa</DialogTitle>
         </DialogHeader>

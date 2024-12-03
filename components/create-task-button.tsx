@@ -48,7 +48,7 @@ export const CreateTaskButton = ({
     status: string;
   }) => {
     try {
-      await onCreate({
+      onCreate({
         ...values,
         status: values.status || "NOT_INITIALIZED",
       });
@@ -56,7 +56,6 @@ export const CreateTaskButton = ({
       // Exibindo o toast de sucesso
       toast({
         title: "Tarefa criada com sucesso!",
-        description: "Tarefa criada com sucesso.",
       });
 
       setTimeout(() => {
@@ -83,10 +82,10 @@ export const CreateTaskButton = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button className="gap-1 font-bold">
-          <PlusIcon className="w-4 h-4" /> Create Task
+          <PlusIcon className="w-4 h-4" /> Criar Tarefa
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-md sm:max-w-lg lg:max-w-xl p-4">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-md sm:max-w-lg lg:max-w-xl p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>Create New Task</DialogTitle>
         </DialogHeader>
