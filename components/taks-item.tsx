@@ -23,14 +23,14 @@ const TaskItem = ({ task }: TaskItemProps) => {
 
   return (
     <div>
-      <Card className="max-w-sm w-full mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <Card className="max-w-sm w-full mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300 p-2">
         <CardHeader className="space-y-2">
           <CardTitle className="text-lg font-bold text-gray-200">
             {task.title}
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="space-y-4 p-4">
+        <CardContent className="space-y-4">
           {/* Descrição da tarefa */}
           <p className="text-sm text-gray-500">
             {task.description || "Sem descrição."}
