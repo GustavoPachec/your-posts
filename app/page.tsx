@@ -7,10 +7,13 @@ import TaskItem from "@/components/taks-item";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
 import { createTask } from "./_actions/create-task";
+import { authOptions } from "./_lib/auth";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const Home = async () => {
   const tasks = await db.task.findMany({});
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <>
@@ -19,10 +22,16 @@ const Home = async () => {
         <div className="p-5 w-full max-w-4xl flex flex-col items-center justify-center flex-1">
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold">
-              Olá, {session?.user ? session.user.name : "Bem vindo"}
+              Olá, {session?.user ? session.user.name + "." : "Bem vindo."}
             </h2>
             <p className="text-sm sm:text-base text-gray-500">
-              Segunda-feira, 29 de Novembro
+              <span className="capitalize">
+                {format(new Date(), "EEEE, dd", { locale: ptBR })}
+              </span>
+              <span>&nbsp;de&nbsp;</span>
+              <span className="capitalize">
+                {format(new Date(), "MMMM", { locale: ptBR })}
+              </span>
             </p>
           </div>
 
