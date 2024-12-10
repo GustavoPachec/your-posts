@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/prisma";
+import { db } from "@/lib/prisma";
 import { EditTaskButton } from "@/components/edit-task-button";
 import SidebarSheet from "@/components/sidebar-sheet";
 import { Button } from "@/components/ui/button";

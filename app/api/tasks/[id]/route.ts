@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/app/lib/prisma";
+import { db } from "@/lib/prisma";
 
 export async function PUT(req: Request, context: { params: { id: string } }) {
   const { id } = context.params;
