@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "../_lib/prisma";
+import { db } from "@/lib/prisma";
 
 interface createTaskParamsProps {
   title: string;

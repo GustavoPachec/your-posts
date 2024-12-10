@@ -2,12 +2,12 @@ import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
-import { db } from "./_lib/prisma";
+import { db } from "../lib/prisma";
 import TaskItem from "@/components/taks-item";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
-import { createTask } from "./_actions/create-task";
-import { authOptions } from "./_lib/auth";
+import { createTask } from "./actions/create-task";
+import { authOptions } from "../lib/auth";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 

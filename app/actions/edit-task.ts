@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from "next/server";
-import { db } from "@/app/_lib/prisma";
+import { db } from "@/app/lib/prisma";
 
 export async function PUT(req: Request, context: { params: { id: string } }) {
   const { id } = context.params; // Pegue o ID do contexto
