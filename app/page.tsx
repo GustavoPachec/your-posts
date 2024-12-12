@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { db } from "../lib/prisma";
-import TaskItem from "@/components/taks-item";
+import TaskItem from "@/components/task-item";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
 import { createTask } from "./actions/create-task";

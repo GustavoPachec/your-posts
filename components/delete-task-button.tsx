@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
@@ -65,9 +66,11 @@ export const DeleteTaskButton = ({ taskId }: DeleteTaskButtonProps) => {
           desfeita.
         </p>
         <DialogFooter>
-          <Button variant="outline" onClick={() => setIsDeleting(false)}>
-            Cancelar
-          </Button>
+          <DialogClose>
+            <Button variant="outline" onClick={() => setIsDeleting(false)}>
+              Cancelar
+            </Button>
+          </DialogClose>
           <Button
             variant="destructive"
             onClick={handleDelete}

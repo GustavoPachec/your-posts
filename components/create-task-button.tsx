@@ -12,7 +12,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { PlusIcon, Clock } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -29,10 +29,11 @@ const validationSchema = Yup.object({
   title: Yup.string()
     .required("O título é obrigatório")
     .min(3, "O título deve ter pelo menos 3 caracteres"),
-  description: Yup.string()
-    .required("A descrição é obrigatória")
-    .min(5, "A descrição deve ter pelo menos 5 caracteres"),
-  status: Yup.string().required("O status é obrigatório"),
+  description: Yup.string().min(
+    3,
+    "A descrição deve ter pelo menos 3 caracteres"
+  ),
+  status: Yup.string(),
 });
 
 export const CreateTaskButton = ({
@@ -70,14 +71,6 @@ export const CreateTaskButton = ({
     }
   };
 
-  // Função para renderizar ícones de status
-  const getStatusIcon = (status: string) => {
-    if (status === "IN_PROGRESS") {
-      return <Clock className="w-5 h-5 text-yellow-500" />;
-    }
-    return null;
-  };
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -98,7 +91,7 @@ export const CreateTaskButton = ({
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, setFieldValue }) => (
             <Form className="space-y-4">
               {/* Campo de título */}
               <div>
@@ -159,16 +152,6 @@ export const CreateTaskButton = ({
                   component="div"
                   className="text-red-500 text-sm mt-1"
                 />
-              </div>
-
-              {/* Ícone de status */}
-              <div className="flex items-center space-x-2 mt-2">
-                {getStatusIcon(values.status)}
-                <span className="text-sm text-gray-600">
-                  {values.status === "IN_PROGRESS"
-                    ? "Em Progresso"
-                    : "Não Iniciada"}
-                </span>
               </div>
 
               <DialogFooter>
