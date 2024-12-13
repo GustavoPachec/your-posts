@@ -2,14 +2,16 @@ import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
-import { db } from "../lib/prisma";
+
 import TaskItem from "@/components/task-item";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
-import { createTask } from "./actions/create-task";
-import { authOptions } from "../lib/auth";
+
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { db } from "@/lib/prisma";
+import { authOptions } from "@/lib/auth";
+import { createTask } from "../actions/create-task";
 
 const Home = async () => {
   const tasks = await db.task.findMany({});
