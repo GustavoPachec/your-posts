@@ -7,11 +7,12 @@ import TaskItem from "@/components/taks-item";
 import { getServerSession } from "next-auth";
 import { CreateTaskButton } from "@/components/create-task-button";
 import { createTask } from "./_actions/create-task";
+import { authOptions } from "./_lib/auth";
 
 const Home = async () => {
   const tasks = await db.task.findMany({});
-  const session = await getServerSession();
-
+  const session = await getServerSession(authOptions);
+  console.log(session);
   return (
     <>
       <Header />
