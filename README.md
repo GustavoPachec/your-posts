@@ -8,6 +8,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 First, run the development server:
+Generate NEXTAUTH_SECRET
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 ```bash
 npm run dev
@@ -18,6 +20,9 @@ pnpm dev
 # or
 bun dev
 ```
+
+RUN DATABASE
+npx prisma db push
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

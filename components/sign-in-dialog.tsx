@@ -11,7 +11,7 @@ const SignInDialog = () => {
     <div className="flex flex-col items-center space-y-4">
       <Button
         variant="outline"
-        className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+        className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 bg-white"
         onClick={handleLoginWithGoogleClick}
       >
         <Image

@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { HomeIcon, LogInIcon, LogOutIcon } from "lucide-react";
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import Link from "next/link";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import SignInDialog from "./sign-in-dialog";
@@ -41,6 +41,7 @@ const SidebarSheet = () => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="w-[90%]">
+                <DialogTitle>Faça login</DialogTitle>
                 <SignInDialog />
               </DialogContent>
             </Dialog>
@@ -51,7 +52,7 @@ const SidebarSheet = () => {
       <div className="flex flex-col gap-2 border-b border-solid py-5">
         <SheetClose asChild>
           <Button className="justify-start gap-2" variant="ghost" asChild>
-            <Link href="/">
+            <Link href="/tasks">
               <HomeIcon size={18} />
               Início
             </Link>

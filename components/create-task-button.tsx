@@ -46,12 +46,11 @@ export const CreateTaskButton = ({
   const handleSubmit = async (values: {
     title: string;
     description: string;
-    status: string;
+    status: "NOT_INITIALIZED" | "PENDING" | "COMPLETED";
   }) => {
     try {
       onCreate({
         ...values,
-        status: values.status || "NOT_INITIALIZED",
       });
 
       // Exibindo o toast de sucesso
@@ -140,9 +139,8 @@ export const CreateTaskButton = ({
                         <SelectItem value="NOT_INITIALIZED">
                           Não Iniciada
                         </SelectItem>
-                        <SelectItem value="IN_PROGRESS">
-                          Em Progresso
-                        </SelectItem>
+                        <SelectItem value="PENDING">Em Progresso</SelectItem>
+                        <SelectItem value="COMPLETED">Finalizada</SelectItem>
                       </SelectContent>
                     </Select>
                   )}

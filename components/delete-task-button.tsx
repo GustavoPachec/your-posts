@@ -66,7 +66,7 @@ export const DeleteTaskButton = ({ taskId }: DeleteTaskButtonProps) => {
           desfeita.
         </p>
         <DialogFooter>
-          <DialogClose>
+          <DialogClose asChild>
             <Button variant="outline" onClick={() => setIsDeleting(false)}>
               Cancelar
             </Button>

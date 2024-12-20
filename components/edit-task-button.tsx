@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
@@ -16,6 +17,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Edit } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 // Validação usando Yup
 const validationSchema = Yup.object({
@@ -30,8 +38,11 @@ const validationSchema = Yup.object({
 
 interface EditTaskButtonProps {
   taskId: string;
-  initialData: { title: string; description: string; status: string };
-  children: ReactNode;
+  initialData: {
+    title: string;
+    description: string;
+    status: "NOT_INITIALIZED" | "PENDING" | "COMPLETED";
+  };
 }
 
 export const EditTaskButton = ({
@@ -45,7 +56,7 @@ export const EditTaskButton = ({
   const handleSubmit = async (values: {
     title: string;
     description: string;
-    status: string;
+    status: "NOT_INITIALIZED" | "PENDING" | "COMPLETED";
   }) => {
     setIsUpdating(true);
     try {
@@ -88,7 +99,7 @@ export const EditTaskButton = ({
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, setFieldValue }) => (
             <Form className="space-y-4">
               <div>
                 <Field name="title" placeholder="Título" as={Input} />
@@ -110,6 +121,35 @@ export const EditTaskButton = ({
                   className="text-red-500 text-sm mt-1"
                 />
               </div>
+              <div>
+                <Field name="status">
+                  {({ field }: { field: any }) => (
+                    <Select
+                      value={field.value}
+                      onValueChange={(value: string) =>
+                        setFieldValue("status", value)
+                      }
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Selecione o status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="NOT_INITIALIZED">
+                          Não Iniciada
+                        </SelectItem>
+                        <SelectItem value="PENDING">Em Progresso</SelectItem>
+                        <SelectItem value="COMPLETED">Finalizada</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="status"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
               <DialogFooter>
                 <Button type="submit" disabled={isSubmitting || isUpdating}>
                   {isSubmitting || isUpdating ? "Atualizando..." : "Atualizar"}
